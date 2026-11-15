@@ -1,0 +1,9 @@
+/* Coordinates are relative to the original 992 x 1586 PNG. */
+html { background: #00101e; scroll-behavior: smooth; }
+body { margin: 0; background: #00101e; }
+.artwork { position: relative; width: 100%; margin: 0; }
+.artwork > img { display: block; width: 100%; height: auto; }
+.hotspot { position: absolute; display: block; background: transparent; }
+.hotspot:focus-visible { outline: 3px solid white; outline-offset: -3px; box-shadow: inset 0 0 0 6px #005968; }
+.section-target { position: absolute; width: 0; height: 0; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
