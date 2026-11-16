@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#061322">
+  <meta name="description" content="GVAI customer workspace interface preview. No account or live monitoring data is connected.">
+  <link rel="icon" type="image/svg+xml" href="assets/gvai-mark.svg"><link rel="stylesheet" href="site.css"><link rel="stylesheet" href="portal.css">
+  <title>Workspace preview | GVAI Safety Systems</title>
+</head>
+<body class="portal-body">
+  <a class="skip-link" href="#workspace-main">Skip to workspace</a>
+  <header class="portal-header">
+    <a class="brand" href="index.html" aria-label="GVAI Safety Systems home"><img src="assets/gvai-mark.svg" width="38" height="38" alt=""><span><b>GVAI</b><small>SAFETY SYSTEMS</small></span></a>
+    <div class="portal-top-status"><span class="status-dot status-dot-amber"></span> PREVIEW · NOT AUTHENTICATED</div>
+    <a class="portal-exit" href="index.html">Exit workspace <span aria-hidden="true">↗</span></a>
+  </header>
+  <div class="portal-frame">
+    <aside class="portal-sidebar" aria-label="Workspace navigation">
+      <div class="workspace-label"><span class="workspace-glyph">GV</span><span><b>Customer workspace</b><small>Preview layout</small></span></div>
+      <p class="portal-nav-label">WORKSPACE</p>
+      <nav class="portal-nav" id="portal-nav">
+        <a href="#/protection" data-route="protection"><span class="nav-glyph">◈</span>Protection snapshot</a>
+        <a href="#/overview" data-route="overview"><span class="nav-glyph">▦</span>Overview</a>
+        <a href="#/activity" data-route="activity"><span class="nav-glyph">⌁</span>Activity</a>
+        <a href="#/reports" data-route="reports"><span class="nav-glyph">▤</span>Reports</a>
+        <a href="#/alerts" data-route="alerts"><span class="nav-glyph">◇</span>Alerts</a>
+        <a href="#/usage" data-route="usage"><span class="nav-glyph">◷</span>Usage</a>
+        <a href="#/ask-gvai" data-route="ask-gvai"><span class="nav-glyph">✳</span>Ask GvAI</a>
+      </nav>
+      <p class="portal-nav-label portal-nav-label-spaced">ACCOUNT</p>
+      <nav class="portal-nav" aria-label="Account navigation">
+        <a href="#/api-keys" data-route="api-keys"><span class="nav-glyph">⌘</span>API keys</a>
+        <a href="#/billing" data-route="billing"><span class="nav-glyph">◇</span>Subscription</a>
+        <a href="#/settings" data-route="settings"><span class="nav-glyph">⚙</span>Settings</a>
+      </nav>
+      <div class="sidebar-bottom"><span class="status-dot status-dot-muted"></span><span>No live data connection</span></div>
+    </aside>
+    <main id="workspace-main" class="portal-main" tabindex="-1">
+      <div class="portal-warning" role="note"><b>Workspace preview</b><span>No authenticated account, API key, subscription, or monitoring source is connected. This screen contains no customer telemetry.</span></div>
+      <div id="portal-view" aria-live="polite">
+        <section class="portal-page">
+          <p class="portal-kicker">CUSTOMER WORKSPACE / PROTECTION SNAPSHOT</p><h1>Protection snapshot</h1>
+          <p class="portal-subtitle">Your operational advisory view. Live monitoring is not connected.</p>
+          <div class="protection-hero">
+            <div class="protection-orbit orbit-a"></div><div class="protection-orbit orbit-b"></div>
+            <div class="protection-seal"><svg viewBox="0 0 150 176" aria-hidden="true"><path d="M75 5 137 28v46c0 43-25 76-62 96C38 150 13 117 13 74V28L75 5Z" fill="rgba(26,205,234,.06)" stroke="currentColor" stroke-width="2"/><path d="M75 21 121 38v36c0 33-17 58-46 75-29-17-46-42-46-75V38l46-17Z" fill="none" stroke="currentColor" stroke-opacity=".35"/><text x="75" y="96" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="39" font-weight="700">GV</text></svg></div>
+            <div class="protection-state"><span class="state-indicator"><i></i> NOT CONNECTED</span><h2>No live protection data</h2><p>Connect an authenticated monitoring source before this snapshot can display customer-specific information.</p></div>
+            <div class="snapshot-meta"><span>LAST VERIFIED</span><b>—</b><span>SOURCES CONNECTED</span><b>—</b></div>
+          </div>
+          <div class="portal-card-grid">
+            <article class="portal-card"><div class="portal-card-head"><span>ADVISORY STATUS</span><span class="state-pill">UNAVAILABLE</span></div><strong>—</strong><p>No advisory events have been retrieved.</p></article>
+            <article class="portal-card"><div class="portal-card-head"><span>OPEN ALERTS</span><span class="state-pill">UNAVAILABLE</span></div><strong>—</strong><p>Alerts require an authenticated data connection.</p></article>
+            <article class="portal-card"><div class="portal-card-head"><span>API USAGE</span><span class="state-pill">UNAVAILABLE</span></div><strong>—</strong><p>Usage is not connected to a customer account.</p></article>
+          </div>
+          <p class="portal-footnote">The interface animation is decorative. It does not indicate that a model, workload, or environment is being monitored or protected.</p>
+        </section>
+      </div>
+      <noscript><p class="callout">JavaScript is disabled. The protection snapshot preview is shown above; account and live data services remain unavailable.</p></noscript>
+    </main>
+  </div>
+  <script src="portal.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+# GVAI Safety Systems
+
+GVAI Safety Systems is developing an advisory-first product for AI operations.
+
+## Public pages
+- https://gvaisafety.com/
+- https://gvaisafety.com/features.html
+- https://gvaisafety.com/pricing.html
+- https://gvaisafety.com/developers.html
+
+## Current product boundary
+- The advisory API is priced at $99 USD per month.
+- Public account registration, authentication, Stripe checkout, verified subscription entitlement, and API-key issuance are not connected.
+- The backend source contains a private/loopback POST /v1/evaluations route, but no public customer API base URL is available.
+- Live monitoring data and customer telemetry are not connected to this website.
+- Ask GvAI chat is not connected; this website does not fabricate AI responses.
+- ALLOW, QUALIFY, and BLOCK describe advisory outcomes only.
+- GVAI does not provide automatic workload shutdown, policy enforcement, safety certification, or a guarantee of protection.
+- Do not submit credentials, payment data, API keys, personal information, or sensitive system details to this site.
+
+For current integration status, see https://gvaisafety.com/developers.html#status.
