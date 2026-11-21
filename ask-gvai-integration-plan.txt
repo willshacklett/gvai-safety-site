@@ -1,0 +1,43 @@
+Ask GVAI connection plan — local design phase
+
+Existing site
+The developers page marks chat NOT CONNECTED. The portal's Ask GVAI route
+is an authenticated-workspace layout placeholder without a verified chat
+destination. This preview is browser-local, with no storage or network
+client. Closing the panel keeps the draft for the current page lifetime.
+
+Future text path
+- Introduce a separately reviewed, same-origin server endpoint. The
+  browser sends only the requested text and an opaque correlation ID.
+  Validate content type, origin, payload length and conversation limits at
+  the endpoint. Reject cross-account conversation references. Send requests
+  to OpenAI only from the server using a scoped project credential from
+  the server secret store. Keep credentials and internal provider errors
+  out of bundles, browser responses, transcripts and logs.
+- Start with authenticated access and server-side authorization. If public
+  access is separately approved, use anonymous session binding and layered
+  limits per session and source, abuse detection and a global concurrency
+  ceiling. Protect cookie-authenticated writes against CSRF. Apply request
+  and output caps, per-user quotas, project budget ceilings and a kill
+  switch for this chat service. Keep product safety STOP independent.
+- Keep chat advisory. Start without tools or external actions. Define
+  disallowed inputs and moderation handling, and return only plain text
+  or safely rendered content. Treat user input and model output as data.
+- Before sending anything, disclose provider processing, what is retained,
+  who can access it, and how deletion works. Minimize retention and avoid
+  storing raw messages in analytics or error logs. Confirm retention,
+  access control and incident handling before release.
+- Map authentication, rate limit, timeout and provider failures to
+  accessible, sanitized UI messages. Preserve drafts on failure. Avoid
+  automatic retries after uncertain outcomes. Track availability and
+  spending using metadata without recording prompts. Review the real
+  integration and official branding before enabling attribution.
+
+Future voice path
+Keep the placeholder disabled until an approved audio path exists.
+Request microphone access only on an explicit user action, after explaining
+capture and processing. Provide visible recording state, stop and cancel,
+handle permission denial, and release tracks immediately when done. Bound
+audio size and duration. Transcribe through the separately reviewed server
+path with the same authentication, rate, spend and retention controls. Let
+users review and edit text before sending. Keep text input available.
