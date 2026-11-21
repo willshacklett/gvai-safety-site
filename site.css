@@ -19,6 +19,22 @@ button,a,input,textarea{touch-action:manipulation}
 .brand span{display:grid;line-height:1.1;letter-spacing:.1em}
 .brand b{font:800 16px/1 var(--display);letter-spacing:.18em}
 .brand small{margin-top:6px;font:500 8px/1 var(--mono);letter-spacing:.27em;color:var(--muted)}
+
+/* The homepage wordmark keeps the existing brand's font metrics. */
+.nav-wordmark { transform: skewX(-9deg); }
+.brand .nav-wordmark span { display: inline; font: inherit; letter-spacing: inherit; }
+.nav-wordmark-gv { color: #f0f5ff; }
+.nav-wordmark-ai { color: #25ddff; }
+
+@supports (background-clip: text) {
+  .nav-wordmark-gv, .nav-wordmark-ai { background-clip: text; color: transparent; }
+  .nav-wordmark-gv { background-image: linear-gradient(#fff 20%, #d6e0eb 60%, #9baec3); }
+  .nav-wordmark-ai { background-image: linear-gradient(#84f4ff 14%, #21d9f8 58%, #54a5ff); }
+}
+
+@media (forced-colors: active) {
+  .nav-wordmark-gv, .nav-wordmark-ai { background-image: none; color: LinkText; }
+}
 .primary-nav{display:flex;align-items:center;gap:30px}
 .primary-nav>a:not(.button){font-size:13px;font-weight:600;color:#c1d0da}
 .primary-nav>a:not(.button):hover{color:var(--cyan)}
@@ -28,6 +44,26 @@ button,a,input,textarea{touch-action:manipulation}
 .button:hover{transform:translateY(-2px)}
 .button-primary{color:#04131f;background:linear-gradient(135deg,#75eff5,#17c9e2);box-shadow:0 7px 24px rgba(20,207,232,.2)}
 .button-primary:hover{color:#04131f;box-shadow:0 10px 34px rgba(20,207,232,.34)}
+
+/* Match the Ask GVAI launcher's navy glass and cyan edge on the homepage. */
+.watch-home .primary-nav .button[href="signup.html"] {
+  border-color: #42d9f4;
+  border-radius: 999px;
+  background: linear-gradient(170deg, #153850, #081a2c 54%, #071421);
+  box-shadow: inset 0 1px 5px rgba(115, 222, 250, .2), 0 0 12px rgba(30, 216, 239, .2);
+  color: #f4f8ff;
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+
+.watch-home .primary-nav .button[href="signup.html"]:hover {
+  transform: none;
+  border-color: #a0f5ff;
+  box-shadow: inset 0 1px 7px rgba(115, 222, 250, .32), 0 0 17px rgba(30, 216, 239, .36);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .watch-home .primary-nav .button[href="signup.html"] { transition: none; }
+}
 .button-small{min-height:40px;padding:0 16px;font-size:12px}
 .button-quiet{border-color:rgba(121,199,222,.24);color:var(--text);background:rgba(11,30,46,.52)}
 .button-outline{border-color:rgba(30,216,239,.54);color:var(--cyan-soft);background:rgba(12,35,52,.7)}
@@ -336,4 +372,162 @@ h1 em,h2 em{font-style:normal;color:var(--cyan-soft)}
 
 @media (prefers-reduced-motion: reduce) {
   .watch-shield { animation: none; }
+}
+
+/* Homepage Ask GVAI availability */
+.ask-gvai-hero {
+  display: grid;
+  justify-items: end;
+  gap: .2rem;
+  padding-block: .55rem 0;
+}
+
+.ask-gvai-hero p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .875rem;
+  text-align: right;
+}
+
+.ask-gvai-hero .ask-gvai-button {
+  display: block;
+  width: min(100%, 21rem);
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+}
+
+.ask-gvai-button img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ask-gvai-hero .ask-gvai-button:hover { transform: none; }
+.ask-gvai-hero .ask-gvai-button:enabled:hover { filter: brightness(1.14); }
+.ask-gvai-hero .ask-gvai-button:focus-visible { outline-offset: 2px; }
+
+@media (max-width: 700px) {
+  /* The existing mobile menu overlays the page while expanded. */
+  .site-header:has(.primary-nav.is-open) + main .ask-gvai-hero { visibility: hidden; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ask-gvai-hero .ask-gvai-button { transition: none; }
+}
+
+/* Ask GVAI local chat preview */
+.ask-gvai-hero .ask-gvai-button:enabled { cursor: pointer; }
+
+.ask-chat {
+  width: min(100% - 2rem, 38rem);
+  max-width: none;
+  max-height: calc(100% - 2rem);
+  max-height: calc(100dvh - 2rem);
+  padding: 0;
+  overflow: auto;
+  border: 1px solid rgba(30, 216, 239, .38);
+  border-radius: 1rem;
+  color: var(--text);
+  background: #0a1c2d;
+  box-shadow: 0 24px 75px rgba(0, 0, 0, .55);
+}
+
+.ask-chat[open] {
+  display: grid;
+  grid-template-rows: auto minmax(6rem, 1fr) auto auto;
+}
+
+.ask-chat::backdrop { background: rgba(2, 10, 19, .78); }
+body:has(.ask-chat[open]) { overflow: hidden; }
+
+.ask-chat-head {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.ask-chat-brand { min-width: 0; }
+.ask-chat-brand h2 { margin: 0 0 .25rem; }
+.ask-chat-brand img {
+  display: block;
+  width: min(100%, 18rem);
+  height: auto;
+}
+.ask-chat-head p, .ask-chat-conversation p { margin: 0; color: var(--muted); }
+.ask-chat-head p { font-size: .875rem; }
+.ask-chat-close { margin-left: auto; flex-shrink: 0; }
+
+.ask-chat-conversation {
+  display: grid;
+  min-height: 6rem;
+  height: min(32dvh, 15rem);
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 1rem;
+  background: #071524;
+}
+
+.ask-chat-conversation div { margin: auto; max-width: 23rem; text-align: center; }
+.ask-chat-conversation h3 { margin: 0 0 .35rem; font-size: 1.125rem; }
+.ask-chat-conversation:focus-visible { outline-offset: -4px; }
+
+.ask-chat-form {
+  display: grid;
+  gap: .5rem;
+  padding: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.ask-chat-form label { font-size: .875rem; font-weight: 700; }
+
+.ask-chat-form textarea {
+  width: 100%;
+  min-height: 4.5rem;
+  max-height: 12rem;
+  padding: .65rem .8rem;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: .55rem;
+  color: var(--text);
+  background: #051321;
+}
+
+.ask-chat-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; }
+.ask-chat-actions .button, .ask-chat-close { min-height: 44px; padding-inline: .85rem; }
+.ask-chat-actions [type="submit"] { margin-left: auto; }
+.ask-chat-voice:disabled { color: var(--muted); cursor: default; transform: none; }
+.ask-chat-voice svg { flex: none; }
+#ask-chat-count { color: var(--muted); font-size: .875rem; }
+.ask-chat-feedback { margin: 0; color: var(--amber); font-size: .875rem; }
+
+.ask-chat-attribution {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .4rem .65rem;
+  margin: 0;
+  padding: .65rem 1rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .8125rem;
+}
+
+.ask-chat-logo-slot {
+  padding: .1rem .4rem;
+  border: 1px dashed currentColor;
+  border-radius: .25rem;
+}
+
+@media (max-width: 540px) {
+  .ask-chat {
+    width: calc(100% - 1rem);
+    max-height: calc(100dvh - 1rem);
+  }
+
+  .ask-chat-head, .ask-chat-form, .ask-chat-conversation, .ask-chat-attribution { padding: .75rem; }
 }

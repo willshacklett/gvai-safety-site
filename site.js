@@ -114,3 +114,49 @@
   controls.hidden = false;
   status.hidden = false;
 })();
+
+(() => {
+  const dialog = document.querySelector("#ask-gvai-chat");
+  const trigger = document.querySelector("[data-ask-open]");
+  if (!dialog || !trigger || typeof dialog.showModal !== "function") return;
+
+  const form = dialog.querySelector(".ask-chat-form");
+  const input = form.querySelector("textarea");
+  const count = form.querySelector("#ask-chat-count");
+  const feedback = form.querySelector("[data-ask-feedback]");
+  const close = dialog.querySelector("[data-ask-close]");
+  const limit = input.maxLength;
+  const displayCount = new Intl.NumberFormat("en-US");
+
+  function updateCount() {
+    if (input.value.length > limit) input.value = input.value.slice(0, limit);
+    count.textContent = `${displayCount.format(input.value.length)} / ${displayCount.format(limit)}`;
+  }
+
+  input.addEventListener("input", () => {
+    updateCount();
+    feedback.textContent = "";
+  });
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    updateCount();
+    feedback.textContent = input.value.trim()
+      ? "The chat service is not connected. Your message was not sent and remains in the composer."
+      : "Enter a message before sending.";
+  });
+
+  trigger.addEventListener("click", () => {
+    if (dialog.open) return;
+    dialog.showModal();
+    close.focus();
+  });
+
+  close.addEventListener("click", () => dialog.close());
+  dialog.addEventListener("close", () => {
+    if (!dialog.open) trigger.focus();
+  });
+
+  updateCount();
+  trigger.disabled = false;
+})();

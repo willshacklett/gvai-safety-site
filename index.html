@@ -20,7 +20,7 @@
     <div class="nav-wrap">
       <a class="brand" href="index.html" aria-label="GVAI Safety Systems home">
         <img src="assets/gvai-mark.svg" width="42" height="42" alt="">
-        <span><b>GVAI</b><small>SAFETY SYSTEMS</small></span>
+        <span><b class="nav-wordmark"><span class="nav-wordmark-gv">GV</span><span class="nav-wordmark-ai">AI</span></b><small>SAFETY SYSTEMS</small></span>
       </a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
         <span class="sr-only">Open navigation</span><i></i><i></i>
@@ -36,6 +36,12 @@
   </header>
 
   <main id="main">
+    <div class="section-wrap ask-gvai-hero">
+      <button class="button ask-gvai-button" type="button" disabled aria-label="Ask GVAI" aria-haspopup="dialog" aria-controls="ask-gvai-chat" aria-describedby="ask-gvai-status" data-ask-open>
+        <img src="assets/ask-gvai-button-isolated.png" alt="" width="1623" height="451">
+      </button>
+      <p id="ask-gvai-status">Artwork preview · Chat service unavailable</p>
+    </div>
     <section class="hero watch-hero section-wrap" aria-labelledby="hero-title">
       <div class="hero-copy">
         <p class="eyebrow"><span class="eyebrow-line"></span> AI OPERATIONS ADVISORY</p>
@@ -168,6 +174,43 @@
     </div>
     <div class="section-wrap footer-bottom"><span>© <span data-year>2026</span> GVAI Safety Systems</span><span>Advisory only · no automated enforcement</span><a href="assets/GvAI-MIT-LICENSE.txt">Mark attribution</a></div>
   </footer>
+  <dialog class="ask-chat" id="ask-gvai-chat" aria-labelledby="ask-chat-title" aria-describedby="ask-chat-summary">
+    <div class="ask-chat-head">
+      <div class="ask-chat-brand">
+        <h2 id="ask-chat-title">
+          <img src="assets/ask-gvai-chat-brand.png" alt="Ask GVAI" width="1134" height="304">
+        </h2>
+        <p id="ask-chat-summary">Chat preview · AI responses unavailable</p>
+      </div>
+      <button class="button button-quiet ask-chat-close" type="button" data-ask-close aria-label="Close Ask GVAI">Close</button>
+    </div>
+
+    <div class="ask-chat-conversation" role="region" aria-label="Conversation preview" tabindex="0">
+      <div>
+        <h3>No conversation yet</h3>
+        <p>Try the composer below. The chat service is coming soon. This preview keeps your draft on this page and sends nothing.</p>
+      </div>
+    </div>
+
+    <form class="ask-chat-form" method="dialog" novalidate>
+      <label for="ask-chat-input">Your message</label>
+      <textarea id="ask-chat-input" rows="3" maxlength="2000" aria-describedby="ask-chat-count" placeholder="Write a message"></textarea>
+      <div class="ask-chat-actions">
+        <button class="button button-quiet ask-chat-voice" type="button" disabled aria-label="Voice input unavailable">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true" focusable="false">
+            <rect x="9" y="3" width="6" height="12" rx="3"/>
+            <path d="M5 11v1a7 7 0 0 0 14 0v-1m-7 8v3m-3 0h6"/>
+          </svg>
+          Voice unavailable
+        </button>
+        <span id="ask-chat-count">0 / 2,000</span>
+        <button class="button button-primary" type="submit">Send</button>
+      </div>
+      <p class="ask-chat-feedback" data-ask-feedback role="status"></p>
+    </form>
+
+    <p class="ask-chat-attribution"><span class="ask-chat-logo-slot">Official logo slot</span> “Powered by OpenAI” attribution preview · Integration pending</p>
+  </dialog>
   <script src="site.js" defer></script>
 </body>
 </html>
