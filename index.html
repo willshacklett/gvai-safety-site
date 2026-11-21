@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="site.css">
   <title>GVAI Safety Systems — clarity for AI operations</title>
 </head>
-<body>
+<body class="watch-home">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="nav-wrap">
@@ -36,40 +36,61 @@
   </header>
 
   <main id="main">
-    <section class="hero section-wrap">
+    <section class="hero watch-hero section-wrap" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="eyebrow"><span class="eyebrow-line"></span> ADVISORY FOR AI OPERATIONS</p>
-        <h1>See the signal.<br><em>Keep people in control.</em></h1>
-        <p class="hero-lede">GVAI helps teams review operational signals and understand risk with clear, bounded advisory results. Your people make the decisions.</p>
+        <p class="eyebrow"><span class="eyebrow-line"></span> AI OPERATIONS ADVISORY</p>
+        <h1 id="hero-title">See risk sooner.<br><em>Keep control human.</em></h1>
+        <p class="hero-lede">Review AI activity, understand when it crosses a boundary, and give your team the context to decide what happens next.</p>
         <div class="hero-actions">
-          <a class="button button-primary" href="pricing.html">Explore the $99 plan <span aria-hidden="true">↗</span></a>
-          <a class="button button-quiet" href="features.html">How the advisory works <span aria-hidden="true">→</span></a>
+          <a class="button button-primary" href="#simulation">Explore the simulation</a>
+          <a class="button button-quiet" href="features.html">View capabilities</a>
         </div>
-        <p class="hero-note"><span class="status-dot status-dot-cyan"></span> Advisory only · no automated enforcement</p>
+        <p class="hero-note">Advisory only · no automated enforcement</p>
       </div>
-      <div class="hero-art" aria-label="Illustrative GVAI interface preview; no live customer data">
-        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-        <div class="hero-shield">
-          <svg viewBox="0 0 180 210" role="img" aria-label="GV shield illustration">
+      <div class="watch-visual" aria-hidden="true">
+        <div class="watch-rings"></div>
+        <div class="watch-shield">
+          <svg viewBox="0 0 180 210" focusable="false">
             <path d="M90 8 160 34v55c0 49-28 87-70 113C48 176 20 138 20 89V34L90 8Z" fill="rgba(15,211,241,.07)" stroke="currentColor" stroke-width="3"/>
             <path d="M90 23 146 44v44c0 39-20 70-56 93-36-23-56-54-56-93V44l56-21Z" fill="none" stroke="currentColor" stroke-opacity=".34"/>
             <text x="90" y="116" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="54" font-weight="700">GV</text>
           </svg>
-          <span class="shield-spark spark-a"></span><span class="shield-spark spark-b"></span>
         </div>
-        <div class="preview-card">
-          <div class="preview-top"><span>ADVISORY WORKSPACE</span><span class="preview-tag">UI PREVIEW</span></div>
-          <div class="preview-row"><span>Decision summary</span><b>Human review</b></div>
-          <div class="preview-line"><i></i><i></i><i></i></div>
-          <p>Interface illustration · no telemetry connected</p>
-        </div>
-        <div class="art-caption"><span class="status-dot status-dot-muted"></span> VISUAL PREVIEW ONLY</div>
       </div>
     </section>
 
-    <section class="trust-strip" aria-label="Product boundaries">
-      <div class="section-wrap trust-items">
-        <span><b>01</b> Advisory results</span><span><b>02</b> Human decisions</span><span><b>03</b> No active protection claim</span>
+    <section class="watch-band" aria-labelledby="watch-title">
+      <div class="section-wrap watch-band-inner">
+        <div class="watch-band-heading">
+          <p class="eyebrow">PUBLIC STATUS PREVIEW</p>
+          <h2 id="watch-title">GVAI Global AI Watch</h2>
+          <p>Verified public status feeds are not connected.</p>
+        </div>
+        <ul class="watch-ticker" aria-label="Provider data availability">
+          <li><span>OpenAI / ChatGPT</span><strong>DATA UNAVAILABLE</strong></li>
+          <li><span>Anthropic / Claude</span><strong>DATA UNAVAILABLE</strong></li>
+          <li><span>xAI / Grok</span><strong>DATA UNAVAILABLE</strong></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="simulation" class="section-wrap watch-demo" aria-labelledby="simulation-title">
+      <div>
+        <p class="eyebrow">ILLUSTRATIVE SIMULATION</p>
+        <h2 id="simulation-title">From routine activity<br><em>to human review.</em></h2>
+        <p>An example of a boundary review. No live enforcement, customer data, or action on external services.</p>
+      </div>
+      <div class="watch-demo-panel" data-watch-demo>
+        <ol class="watch-stages">
+          <li><strong>Normal AI activity</strong><span>A task stays inside its assigned scope.</span></li>
+          <li><strong>Boundary crossing</strong><span>The task attempts to act outside that scope.</span></li>
+          <li><strong>Stop requested</strong><span>In this scenario, a human operator requests a stop.</span></li>
+        </ol>
+        <p class="watch-demo-status" data-demo-status role="status" hidden></p>
+        <div class="watch-demo-controls" data-demo-controls hidden>
+          <button class="button button-primary" type="button" data-demo-play>Play simulation (18 seconds)</button>
+          <button class="button button-quiet" type="button" data-demo-skip disabled>Skip to outcome</button>
+        </div>
       </div>
     </section>
 
