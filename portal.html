@@ -10,40 +10,47 @@
 <body class="portal-body">
   <a class="skip-link" href="#workspace-main">Skip to workspace</a>
   <header class="portal-header">
-    <a class="brand" href="index.html" aria-label="GVAI Safety Systems home"><img src="assets/gvai-mark.svg" width="38" height="38" alt=""><span><b>GVAI</b><small>SAFETY SYSTEMS</small></span></a>
+    <a class="brand" href="index.html" aria-label="GVAI Safety Systems home">
+      <img src="assets/gvai-mark.svg" width="42" height="42" alt="">
+      <span><b class="nav-wordmark"><span class="nav-wordmark-gv">GV</span><span class="nav-wordmark-ai">AI</span></b><small>SAFETY SYSTEMS</small></span>
+    </a>
     <div class="portal-top-status"><span class="status-dot status-dot-amber"></span> PREVIEW · NOT AUTHENTICATED</div>
     <a class="portal-exit" href="index.html">Exit workspace <span aria-hidden="true">↗</span></a>
   </header>
   <div class="portal-frame">
     <aside class="portal-sidebar" aria-label="Workspace navigation">
-      <div class="workspace-label"><span class="workspace-glyph">GV</span><span><b>Customer workspace</b><small>Preview layout</small></span></div>
-      <p class="portal-nav-label">WORKSPACE</p>
-      <nav class="portal-nav" id="portal-nav">
-        <a href="#/protection" data-route="protection"><span class="nav-glyph">◈</span>Protection snapshot</a>
-        <a href="#/overview" data-route="overview"><span class="nav-glyph">▦</span>Overview</a>
-        <a href="#/activity" data-route="activity"><span class="nav-glyph">⌁</span>Activity</a>
-        <a href="#/reports" data-route="reports"><span class="nav-glyph">▤</span>Reports</a>
-        <a href="#/alerts" data-route="alerts"><span class="nav-glyph">◇</span>Alerts</a>
-        <a href="#/usage" data-route="usage"><span class="nav-glyph">◷</span>Usage</a>
-        <a href="#/ask-gvai" data-route="ask-gvai"><span class="nav-glyph">✳</span>Ask GvAI</a>
-      </nav>
-      <p class="portal-nav-label portal-nav-label-spaced">ACCOUNT</p>
-      <nav class="portal-nav" aria-label="Account navigation">
-        <a href="#/api-keys" data-route="api-keys"><span class="nav-glyph">⌘</span>API keys</a>
-        <a href="#/billing" data-route="billing"><span class="nav-glyph">◇</span>Subscription</a>
-        <a href="#/settings" data-route="settings"><span class="nav-glyph">⚙</span>Settings</a>
-      </nav>
-      <div class="sidebar-bottom"><span class="status-dot status-dot-muted"></span><span>No live data connection</span></div>
+      <details id="workspace-menu" class="workspace-menu" open>
+        <summary>Workspace navigation</summary>
+        <div class="workspace-label"><span class="workspace-glyph">GV</span><span><b>Customer workspace</b><small>Preview layout</small></span></div>
+        <p class="portal-nav-label">WORKSPACE</p>
+        <nav class="portal-nav" id="portal-nav" aria-label="Workspace views">
+          <a href="#/protection" data-route="protection"><span class="nav-glyph" aria-hidden="true">◈</span>Protection snapshot</a>
+          <a href="#/overview" data-route="overview"><span class="nav-glyph" aria-hidden="true">▦</span>Overview</a>
+          <a href="#/activity" data-route="activity"><span class="nav-glyph" aria-hidden="true">⌁</span>Activity</a>
+          <a href="#/reports" data-route="reports"><span class="nav-glyph" aria-hidden="true">▤</span>Reports</a>
+          <a href="#/alerts" data-route="alerts"><span class="nav-glyph" aria-hidden="true">◇</span>Alerts</a>
+          <a href="#/incidents" data-route="incidents"><span class="nav-glyph" aria-hidden="true">◇</span>Incident center</a>
+          <a href="#/usage" data-route="usage"><span class="nav-glyph" aria-hidden="true">◷</span>Usage</a>
+          <a class="portal-ask-link" href="#/ask-gvai" data-route="ask-gvai"><img src="assets/gvai-mark.svg" width="25" height="25" alt="">Ask <strong>GV<span>AI</span></strong></a>
+        </nav>
+        <p class="portal-nav-label portal-nav-label-spaced">ACCOUNT</p>
+        <nav class="portal-nav" aria-label="Account navigation">
+          <a href="#/api-keys" data-route="api-keys"><span class="nav-glyph" aria-hidden="true">⌘</span>API keys</a>
+          <a href="#/billing" data-route="billing"><span class="nav-glyph" aria-hidden="true">◇</span>Subscription</a>
+          <a href="#/notifications" data-route="notifications"><span class="nav-glyph" aria-hidden="true">◎</span>Notifications</a>
+          <a href="#/settings" data-route="settings"><span class="nav-glyph" aria-hidden="true">⚙</span>Settings</a>
+        </nav>
+        <div class="sidebar-bottom"><span class="status-dot status-dot-muted"></span><span>No live data connection</span></div>
+      </details>
     </aside>
     <main id="workspace-main" class="portal-main" tabindex="-1">
       <div class="portal-warning" role="note"><b>Workspace preview</b><span>No authenticated account, API key, subscription, or monitoring source is connected. This screen contains no customer telemetry.</span></div>
-      <div id="portal-view" aria-live="polite">
+      <div id="portal-view">
         <section class="portal-page">
           <p class="portal-kicker">CUSTOMER WORKSPACE / PROTECTION SNAPSHOT</p><h1>Protection snapshot</h1>
           <p class="portal-subtitle">Your operational advisory view. Live monitoring is not connected.</p>
           <div class="protection-hero">
-            <div class="protection-orbit orbit-a"></div><div class="protection-orbit orbit-b"></div>
-            <div class="protection-seal"><svg viewBox="0 0 150 176" aria-hidden="true"><path d="M75 5 137 28v46c0 43-25 76-62 96C38 150 13 117 13 74V28L75 5Z" fill="rgba(26,205,234,.06)" stroke="currentColor" stroke-width="2"/><path d="M75 21 121 38v36c0 33-17 58-46 75-29-17-46-42-46-75V38l46-17Z" fill="none" stroke="currentColor" stroke-opacity=".35"/><text x="75" y="96" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="39" font-weight="700">GV</text></svg></div>
+            <div class="protection-seal" aria-hidden="true"></div>
             <div class="protection-state"><span class="state-indicator"><i></i> NOT CONNECTED</span><h2>No live protection data</h2><p>Connect an authenticated monitoring source before this snapshot can display customer-specific information.</p></div>
             <div class="snapshot-meta"><span>LAST VERIFIED</span><b>—</b><span>SOURCES CONNECTED</span><b>—</b></div>
           </div>
@@ -58,6 +65,109 @@
       <noscript><p class="callout">JavaScript is disabled. The protection snapshot preview is shown above; account and live data services remain unavailable.</p></noscript>
     </main>
   </div>
+  <template id="incident-center-template">
+    <section class="incident-panel incident-hero" aria-labelledby="sample-alert-heading">
+      <p class="incident-demo">DEMO / NOT LIVE</p>
+      <h2 id="sample-alert-heading">Sample notification</h2>
+      <p>A synthetic alert would link to the incident details below. This notification is displayed here for demonstration only.</p>
+      <div class="incident-notification">
+        <strong>High severity · Unexpected response pattern</strong>
+        <p>Incident DEMO-001 · Awaiting human review</p>
+        <a class="button button-primary" href="#/incidents/DEMO-001">Open sample incident <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+    <p><a class="incident-link" href="#/notifications">Preview SMS and email preferences</a></p>
+  </template>
+
+  <template id="incident-detail-template">
+    <p><a class="incident-link" href="#/incidents">← Back to incident center</a></p>
+    <section class="incident-panel incident-hero" aria-labelledby="incident-summary-heading">
+      <div class="incident-badges">
+        <span class="incident-demo">DEMO / NOT LIVE</span>
+        <span class="incident-severity">High severity</span>
+      </div>
+      <h2 id="incident-summary-heading">Unexpected response pattern</h2>
+      <dl class="incident-facts">
+        <div><dt>Incident ID</dt><dd>DEMO-001</dd></div>
+        <div><dt>Observed</dt><dd><time datetime="2026-11-20T14:32:00Z">20 Nov 2026, 14:32 UTC</time></dd></div>
+        <div><dt>Source</dt><dd>Synthetic test workspace</dd></div>
+        <div><dt>Incident status</dt><dd>Awaiting human review</dd></div>
+      </dl>
+    </section>
+    <div class="incident-grid">
+      <section class="incident-panel" aria-labelledby="evidence-heading">
+        <h2 id="evidence-heading">Evidence and GVAI action</h2>
+        <h3>Evidence summary</h3>
+        <p>Two of five fictional test responses deviated from the sample baseline. The example contains no raw prompts or responses.</p>
+        <h3>GVAI action</h3>
+        <p>Simulated advisory flag for human review. No BLOCK or STOP occurred.</p>
+        <h3>Uncertainty</h3>
+        <p>The sample is too small to establish a cause or confirm customer impact.</p>
+      </section>
+      <section class="incident-panel" aria-labelledby="guidance-heading">
+        <h2 id="guidance-heading">Review guidance</h2>
+        <h3>Possible causes</h3>
+        <ul>
+          <li>A recent configuration change.</li>
+          <li>Normal variation in generated responses.</li>
+          <li>A test baseline that needs updating.</li>
+        </ul>
+        <h3>Suggested next steps</h3>
+        <ol>
+          <li>Have an authorized reviewer compare sanitized examples against the expected baseline.</li>
+          <li>Check recent changes and reproduce the pattern in a test workspace.</li>
+          <li>Record and escalate confirmed findings through your internal review process.</li>
+        </ol>
+      </section>
+    </div>
+    <section class="incident-panel" aria-labelledby="review-heading">
+      <h2 id="review-heading">Human review</h2>
+      <p>Acknowledgment records that you saw the sample. Review is a separate decision. Both demo controls reset when you reload.</p>
+      <div class="portal-action">
+        <button class="button button-primary" type="button" id="demo-acknowledge">Acknowledge sample</button>
+        <button class="button button-quiet" type="button" id="demo-review">Request human review</button>
+      </div>
+      <p class="incident-feedback" id="demo-review-status" role="status"></p>
+    </section>
+    <details class="incident-panel incident-ask">
+      <summary>Ask GVAI about this incident</summary>
+      <p><strong>Sample question</strong> What should a reviewer check after a high-severity advisory flags an unexpected response pattern?</p>
+      <p><strong>Sanitized demo context</strong> A fictional test workspace showed two deviations in five sample responses. Cause and impact are unconfirmed.</p>
+      <p>Chat is unavailable. This preview sends no request and generates no AI response.</p>
+    </details>
+  </template>
+
+  <template id="notification-template">
+    <section class="incident-panel incident-hero" aria-labelledby="delivery-heading">
+      <p class="incident-demo">DEMO / NOT LIVE</p>
+      <h2 id="delivery-heading">Delivery preferences</h2>
+      <p>No messages are sent. Selections applied here last until the page is reloaded.</p>
+      <form class="incident-preferences" method="dialog">
+        <fieldset>
+          <legend>Notification channels</legend>
+          <p id="channel-help">Choose SMS, email, both, or neither. Live delivery would require a verified destination and consent for each enabled channel.</p>
+          <div class="incident-grid">
+            <label class="incident-channel"><input type="checkbox" id="demo-sms" aria-describedby="channel-help"><span><strong>SMS</strong><small>Verified phone placeholder · No number connected</small></span></label>
+            <label class="incident-channel"><input type="checkbox" id="demo-email" aria-describedby="channel-help"><span><strong>Email</strong><small>Verified email placeholder · No address connected</small></span></label>
+          </div>
+        </fieldset>
+        <div class="incident-threshold">
+          <label for="demo-threshold"><strong>Minimum severity</strong></label>
+          <select id="demo-threshold" aria-describedby="severity-help">
+            <option value="critical">Critical only</option>
+            <option value="high" selected>High and critical</option>
+            <option value="medium">Medium and above</option>
+            <option value="low">All severities</option>
+          </select>
+          <p id="severity-help">The same threshold applies to every selected channel.</p>
+        </div>
+        <p><strong>Consent preview.</strong> Live SMS would require a separate opt-in. Message and data rates may apply, and frequency would vary with incident activity. Live email would require opt-in and an unsubscribe option. You could revoke consent per channel. This demo does not record consent.</p>
+        <button class="button button-primary" type="submit">Apply demo preferences</button>
+        <p class="incident-feedback" id="demo-preference-status" role="status"></p>
+      </form>
+    </section>
+    <p><a class="incident-link" href="#/incidents">Open the sample notification</a></p>
+  </template>
   <script src="portal.js" defer></script>
 </body>
 </html>
