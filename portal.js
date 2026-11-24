@@ -2,28 +2,25 @@
 
 (() => {
   const view = document.getElementById("portal-view");
-  const navigation = document.getElementById("portal-nav");
-
-  function metricCard(title, description) {
-    return '<article class="portal-card"><div class="portal-card-head"><span>' + title + '</span><span class="state-pill">UNAVAILABLE</span></div><strong>—</strong><p>' + description + '</p></article>';
-  }
+  const protection = view.firstElementChild;
+  const menu = document.getElementById("workspace-menu");
+  const narrowLayout = menu && window.matchMedia('(max-width: 760px)');
+  const incidentPath = '#/incidents/DEMO-001';
+  const demoReview = { acknowledged: false, requested: false };
+  let demoPreferences = { sms: false, email: false, threshold: 'high' };
 
   function emptyPage(description, icon) {
     return '<div class="portal-empty-grid"><section class="portal-empty-card"><div class="empty-symbol">' + icon + '</div><h2>No data available</h2><p>' + description + '</p><span class="state-pill">NOT CONNECTED</span></section><section class="portal-action-card"><h2>Why is this empty?</h2><p>This preview has no authenticated user, backend session, subscription entitlement, API key, or telemetry source. It does not insert placeholder records.</p><div class="portal-action"><a class="button button-quiet" href="developers.html#status">Service status</a></div></section></div>';
   }
 
-  const protection = '<div class="protection-hero"><div class="protection-orbit orbit-a"></div><div class="protection-orbit orbit-b"></div>' +
-    '<div class="protection-seal"><svg viewBox="0 0 150 176" aria-hidden="true"><path d="M75 5 137 28v46c0 43-25 76-62 96C38 150 13 117 13 74V28L75 5Z" fill="rgba(26,205,234,.06)" stroke="currentColor" stroke-width="2"/><path d="M75 21 121 38v36c0 33-17 58-46 75-29-17-46-42-46-75V38l46-17Z" fill="none" stroke="currentColor" stroke-opacity=".35"/><text x="75" y="96" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="39" font-weight="700">GV</text></svg></div>' +
-    '<div class="protection-state"><span class="state-indicator"><i></i> NOT CONNECTED</span><h2>No live protection data</h2><p>Connect an authenticated monitoring source before this snapshot can display customer-specific information.</p></div><div class="snapshot-meta"><span>LAST VERIFIED</span><b>—</b><span>SOURCES CONNECTED</span><b>—</b></div></div>' +
-    '<div class="portal-card-grid">' + metricCard('ADVISORY STATUS', 'No advisory events have been retrieved.') + metricCard('OPEN ALERTS', 'Alerts require an authenticated data connection.') + metricCard('API USAGE', 'Usage is not connected to a customer account.') + '</div>' +
-    '<p class="portal-footnote">The interface animation is decorative. It does not indicate that a model, workload, or environment is being monitored or protected.</p>';
-
   const pages = {
-    protection: ['Protection snapshot', 'Your operational advisory view. Live monitoring is not connected.', protection],
+    protection: ['Customer Protection Snapshot'],
     overview: ['Workspace overview', 'Customer workspace · no account data connected', emptyPage('Account overview, connected sources, and service status are unavailable until a verified customer session exists.', '▦')],
     activity: ['Activity', 'Customer workspace · no account data connected', emptyPage('No account activity has been retrieved. This page will show customer-scoped events only after a verified data connection is available.', '⌁')],
     reports: ['Reports', 'Customer workspace · no account data connected', emptyPage('No reports are available. No sample or simulated monitoring results are shown in this workspace.', '▤')],
     alerts: ['Alerts', 'Customer workspace · no account data connected', emptyPage('Alert delivery is not connected. There are no verified customer alerts to display.', '◇')],
+    incidents: ['Incident center', 'Follow a sample notification to an illustrative incident.', '', 'incident-center-template'],
+    notifications: ['Notification preferences', 'Preview how you would choose which incident alerts to receive.', '', 'notification-template'],
     usage: ['Usage', 'Customer workspace · no account data connected', emptyPage('Usage metering is unavailable until the paid entitlement and advisory API are connected.', '◷')],
     'api-keys': ['API key management', 'Keys should be shown once and stored securely by you.', '<div class="portal-empty-grid"><section class="portal-empty-card"><div class="empty-symbol">⌘</div><h2>No API key issued</h2><p>Key issuance and entitlement checks are not connected. This page cannot create, reveal, rotate, or revoke a credential.</p><span class="state-pill">KEY SERVICE UNAVAILABLE</span></section><section class="portal-action-card"><h2>Keep credentials safe</h2><p>Never place a customer key in browser code, screenshots, or public repositories. The advisory service is not enabled for this account.</p><div class="portal-action"><a class="button button-quiet" href="developers.html">Developer status</a></div></section></div>'],
     billing: ['Subscription', 'Billing history and entitlement status require a verified account connection.', '<div class="portal-empty-grid"><section class="portal-empty-card"><div class="empty-symbol">◇</div><h2>No subscription linked</h2><p>No subscription state was queried. Checkout is unavailable, and no payment action has been taken.</p><span class="state-pill">BILLING UNAVAILABLE</span></section><section class="portal-action-card"><h2>GVAI Advisory API</h2><p>$99 USD per month. Customer checkout remains closed until billing persistence, webhook processing, entitlement, and API-key issuance are verified.</p><div class="portal-action"><a class="button button-quiet" href="pricing.html">View pricing status</a></div></section></div>'],
@@ -36,16 +33,86 @@
     return Object.prototype.hasOwnProperty.call(pages, route) ? route : 'protection';
   }
 
-  function render() {
+  function setupIncident() {
+    const acknowledge = document.getElementById('demo-acknowledge');
+    const requestReview = document.getElementById('demo-review');
+    const status = document.getElementById('demo-review-status');
+
+    function updateReview() {
+      acknowledge.setAttribute('aria-disabled', String(demoReview.acknowledged));
+      requestReview.setAttribute('aria-disabled', String(demoReview.requested));
+      const acknowledgment = demoReview.acknowledged ? 'Sample acknowledged.' : 'Sample awaiting acknowledgment.';
+      const review = demoReview.requested ? 'Demo review requested. No reviewer was contacted.' : 'No demo review requested.';
+      status.textContent = acknowledgment + ' ' + review;
+    }
+
+    acknowledge.addEventListener('click', () => {
+      if (demoReview.acknowledged) return;
+      demoReview.acknowledged = true;
+      updateReview();
+    });
+    requestReview.addEventListener('click', () => {
+      if (demoReview.requested) return;
+      demoReview.requested = true;
+      updateReview();
+    });
+    updateReview();
+  }
+
+  function setupPreferences() {
+    const form = view.querySelector('.incident-preferences');
+    const sms = document.getElementById('demo-sms');
+    const email = document.getElementById('demo-email');
+    const threshold = document.getElementById('demo-threshold');
+    const status = document.getElementById('demo-preference-status');
+    sms.checked = demoPreferences.sms;
+    email.checked = demoPreferences.email;
+    threshold.value = demoPreferences.threshold;
+
+    form.addEventListener('change', () => {
+      status.textContent = 'Changes pending. Apply demo preferences to keep them for this page session.';
+    });
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      demoPreferences = { sms: sms.checked, email: email.checked, threshold: threshold.value };
+      const channels = [sms.checked ? 'SMS' : '', email.checked ? 'Email' : ''].filter(Boolean);
+      status.textContent = 'Demo preferences applied. Channels: ' + (channels.join(' and ') || 'none') +
+        '. Threshold: ' + threshold.selectedOptions[0].text + '. No messages sent.';
+    });
+  }
+
+  function render(moveFocus = false) {
     const route = currentRoute();
-    const page = pages[route];
-    const routeLabel = route.replaceAll('-', ' ').toUpperCase();
-    view.innerHTML = '<section class="portal-page"><p class="portal-kicker">CUSTOMER WORKSPACE / ' + routeLabel + '</p><h1>' + page[0] + '</h1><p class="portal-subtitle">' + page[1] + '</p>' + page[2] + '</section>';
-    document.title = page[0] + ' · Workspace preview | GVAI Safety Systems';
-    navigation.querySelectorAll('[data-route]').forEach((link) => {
+    let page = pages[route];
+    if (route === 'incidents' && location.hash === incidentPath) {
+      page = ['Incident detail', 'Illustrative advisory · DEMO / NOT LIVE', '', 'incident-detail-template'];
+    } else if (route === 'incidents' && location.hash !== '#/incidents') {
+      page = ['Sample incident unavailable', 'DEMO / NOT LIVE · This preview contains one fixed synthetic incident.', '<a class="incident-link" href="#/incidents">Back to incident center</a>'];
+    }
+
+    const [title, subtitle, content, templateId] = page;
+    if (route === 'protection') {
+      view.replaceChildren(protection);
+    } else {
+      const routeLabel = route.replaceAll('-', ' ').toUpperCase();
+      view.innerHTML = '<section class="portal-page"><p class="portal-kicker">CUSTOMER WORKSPACE / ' + routeLabel + '</p><h1 tabindex="-1">' + title + '</h1><p class="portal-subtitle">' + subtitle + '</p>' + content + '</section>';
+      if (templateId) {
+        view.firstElementChild.append(document.getElementById(templateId).content.cloneNode(true));
+      }
+    }
+    document.title = title + ' · Workspace preview | GVAI Safety Systems';
+    document.querySelectorAll('.portal-nav [data-route]').forEach((link) => {
       if (link.dataset.route === route) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
     });
+    if (templateId === 'incident-detail-template') setupIncident();
+    if (templateId === 'notification-template') setupPreferences();
+    if (moveFocus) {
+      const heading = view.querySelector('h1');
+      heading.focus({ preventScroll: true });
+      if (narrowLayout?.matches) menu.open = false;
+      heading.scrollIntoView({ block: 'start' });
+    }
 
     const askForm = document.getElementById('ask-form');
     if (askForm) {
@@ -57,9 +124,19 @@
   }
 
   if (!location.hash) history.replaceState(null, '', location.pathname + '#/protection');
-  window.addEventListener('hashchange', render);
-  navigation.addEventListener('click', (event) => {
-    if (event.target.closest('a[data-route]')) render();
+  document.querySelector('.skip-link').addEventListener('click', (event) => {
+    event.preventDefault();
+    document.getElementById('workspace-main').focus();
   });
-  render();
+  if (narrowLayout) {
+    function syncNavigation() {
+      menu.open = !narrowLayout.matches || menu.contains(document.activeElement);
+    }
+
+    narrowLayout.addEventListener('change', syncNavigation);
+    syncNavigation();
+  }
+
+  window.addEventListener('hashchange', () => render(true));
+  render(location.hash.startsWith('#/incidents/'));
 })();
