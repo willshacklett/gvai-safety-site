@@ -34,16 +34,22 @@ jobs:
           output = Path(os.environ['RUNNER_TEMP']) / 'public-site'
           output.mkdir()
           files = (
-              'LICENSE',
-              'index.html',
-              'site.css',
-              'coming-soon-final.css',
-              'prototype-demo.html',
-              'prototype-demo.css',
-              'prototype-demo.js',
-              'assets/Coming Soon 3.png',
-              'assets/gvai-mark.svg',
+              'assets/Coming Soon.png',
               'assets/GvAI-MIT-LICENSE.txt',
+              'assets/ask-gvai-button-isolated.png',
+              'assets/gvai-mark.svg',
+              'assets/gvai-protection-snapshot-reference.png',
+              'developers.html',
+              'features.html',
+              'global-ai-watch.css',
+              'index.html',
+              'llms.txt',
+              'prototype-demo.css',
+              'prototype-demo.html',
+              'prototype-demo.js',
+              'prototype-site.css',
+              'site.css',
+              'site.js',
           )
           for name in files:
               source = root / name
@@ -107,7 +113,7 @@ jobs:
       pages: write
       id-token: write
     steps:
-      - name: Require Actions source and no custom domain
+      - name: Require Actions source and gvaisafety.com
         shell: python
         env:
           GH_TOKEN: ${{ github.token }}
@@ -125,8 +131,8 @@ jobs:
               pages = json.load(response)
           if pages.get('build_type') != 'workflow':
               raise SystemExit('Pages source must first be set to GitHub Actions by the owner')
-          if 'cname' not in pages or pages['cname'] is not None:
-              raise SystemExit('Expected verified absence of a Pages custom domain')
+          if pages.get('cname') != 'gvaisafety.com':
+              raise SystemExit('Pages custom domain must be exactly gvaisafety.com')
 
       - name: Deploy approved artifact
         id: deploy
