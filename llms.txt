@@ -8,8 +8,12 @@ GVAI Safety Systems is developing an advisory-first product for AI operations.
 - https://gvaisafety.com/prototype-demo.html
 - https://gvaisafety.com/developers.html
 
+## Planned pricing
+- Starter (planned) is $19.99 USD/month after a 30-day free trial. The trial defaults to Starter. A payment method is required at signup. Customers can cancel before the first charge.
+- Upgrade (planned) is $24.99 USD/month total. Customers opt in explicitly. The planned upgrade adds interactive STOP and recovery for authorized users on supported workflows.
+- Signup and checkout are currently unavailable. For early access, email contact@gvaisafety.com.
+
 ## Current product boundary
-- The advisory API is priced at $99 USD per month.
 - Public account registration, authentication, Stripe checkout, verified subscription entitlement, and API-key issuance are not connected.
 - The backend source contains a private/loopback POST /v1/evaluations route, but no public customer API base URL is available.
 - Live monitoring data and customer telemetry are not connected to this website.
